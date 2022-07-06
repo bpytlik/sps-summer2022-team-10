@@ -123,4 +123,8 @@ async function loadTable() {
         }
         dataTable.appendChild(rowElement);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 23180bf06f2e939b93fa3e9d4ad538f4a1b50ce0
