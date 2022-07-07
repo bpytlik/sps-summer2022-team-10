@@ -18,12 +18,13 @@
 async function calculate() {
 
     // // Send a request to correct-url
-    const responseFromServer = await fetch('/form-handler');
+    // const responseFromServer = await fetch('/form-handler');
 
     // // Parse the response as JSON.
-    const myObject = await responseFromServer.json();
+    // const myObject = await responseFromServer.json();
 
     console.log(myObject);
+
 
     // Or hardcoded option, variable for json
     var json = {
@@ -71,6 +72,14 @@ async function calculate() {
 
     // Calculate totals here ...
 
+}
+
+async function addToCart(){
+    const itemName = document.getElementById("item-name").value;
+    const responseFromServer = await fetch(`/item-lookup?item-name=${encodeURIComponent(itemName)}`, {
+        method: 'POST'});
+    const myObject = await responseFromServer.json();
+    console.log(myObject);
 }
 
 async function loadTable() {
@@ -123,8 +132,4 @@ async function loadTable() {
         }
         dataTable.appendChild(rowElement);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 23180bf06f2e939b93fa3e9d4ad538f4a1b50ce0

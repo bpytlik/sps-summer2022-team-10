@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /** Handles Kroger API, send requests to API and get the data  */
 /** Take user input and use the input to return data from Kroger API  */
-@WebServlet("/form-handler")
+@WebServlet("/item-lookup")
 public class DataServlet extends HttpServlet {
    
 
@@ -20,7 +20,7 @@ public class DataServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
   
       // Get the value entered in the form.
-      String textValue = request.getParameter("text-input");
+      String textValue = request.getParameter("item-name");
       response.setContentType("text/html;");
       
     
