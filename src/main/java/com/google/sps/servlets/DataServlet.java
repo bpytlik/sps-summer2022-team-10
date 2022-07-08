@@ -35,7 +35,7 @@ public class DataServlet extends HttpServlet {
             response.getWriter().println("{apples:[{\"item\":\"apple\",\"price\":4.20,\"store\":\"california\"},{\"item\":\"apple\",\"price\":3.30,\"store\":\"oregon\"},{\"item\":\"appple\",\"price\":3.80,\"store\":\"washington\"}]}");
             break;
         default :
-            response.getWriter().println("error");            
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);          
       }
 
     }
