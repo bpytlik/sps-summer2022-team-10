@@ -15,6 +15,9 @@
 
 // fetch Irene JSON string from server
 
+
+var itemList = [];
+
 async function calculate() {
 
     // // Send a request to correct-url
@@ -23,52 +26,52 @@ async function calculate() {
     // // Parse the response as JSON.
     // const myObject = await responseFromServer.json();
 
-    console.log(myObject);
+    console.log(itemList);
 
 
-    // Or hardcoded option, variable for json
-    var json = {
-        "milk":[
-            {
-                "item":"milk",
-                "price":5.50,
-                "store":"california"
-            },
-            {
-                "item":"milk",
-                "price":6.30,
-                "store":"oregon"
-            },
-            {
-                "item":"milk",
-                "price":3.50,
-                "store":"washington"
-            }
-        ]
-    }
+    // // Or hardcoded option, variable for json
+    // var json = {
+    //     "milk":[
+    //         {
+    //             "item":"milk",
+    //             "price":5.50,
+    //             "store":"california"
+    //         },
+    //         {
+    //             "item":"milk",
+    //             "price":6.30,
+    //             "store":"oregon"
+    //         },
+    //         {
+    //             "item":"milk",
+    //             "price":3.50,
+    //             "store":"washington"
+    //         }
+    //     ]
+    // }
 
-    // Converting JSON-encoded string to JS object
-    var obj = JSON.parse(JSON.stringify(json));
+    // // Converting JSON-encoded string to JS object
+    // var obj = JSON.parse(JSON.stringify(json));
 
-    // Define recursive function to print nested values
+    // // Define recursive function to print nested values
 
-    function printValues(obj) {
-        for(var k in obj) {
-            if(obj[k] instanceof Object) {
-                const array = [];
-                printValues(obj[k]);
-                array.push(obj[k]);
-                console.log(array);
-            } else {
-                document.write(obj[k] + "<br>");
-            };
-        }
-    };
+    // function printValues(obj) {
+    //     for(var k in obj) {
+    //         if(obj[k] instanceof Object) {
+    //             const array = [];
+    //             printValues(obj[k]);
+    //             array.push(obj[k]);
+    //             console.log(array);
+    //         } else {
+    //             document.write(obj[k] + "<br>");
+    //         };
+    //     }
+    // };
 
-    // Printing all the values from the resulting object
-    printValues(obj);
+    // // Printing all the values from the resulting object
+    // printValues(obj);
 
-    document.write("<hr>");
+    // document.write("<hr>");
 
     // Calculate totals here ...
 
@@ -76,10 +79,12 @@ async function calculate() {
 
 async function addToCart(){
     const itemName = document.getElementById("item-name").value;
-    const responseFromServer = await fetch(`/item-lookup?item-name=${encodeURIComponent(itemName)}`, {
+    const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
         method: 'POST'});
-    const myObject = await responseFromServer.json();
-    console.log(myObject);
+    const newItemObject = await responseFromServer.json();
+    console.log(newItemObject);
+    itemList.push(newItemObject);
+    console.log(itemList);
 }
 
 async function loadTable() {
