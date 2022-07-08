@@ -20,22 +20,22 @@ public class DataServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
   
       // Get the value entered in the form.
-      String textValue = request.getParameter("item-name");
+      String textValue = request.getParameter("item_name");
       response.setContentType("text/html;");
       
     
       switch(textValue) {
         case "egg" :
-            response.getWriter().println("{eggs:[{\"item\":\"egg\",\"price\":4.50,\"store\":\"california\"},{\"item\":\"egg\",\"price\":5.50,\"store\":\"oregon\"},{\"item\":\"egg\",\"price\":3.50,\"store\":\"washington\"}]}");
+            response.getWriter().println("{\"eggs\":[{\"item\":\"egg\",\"price\":4.50,\"store\":\"california\"},{\"item\":\"egg\",\"price\":5.50,\"store\":\"oregon\"},{\"item\":\"egg\",\"price\":3.50,\"store\":\"washington\"}]}");
             break;
         case "milk" :
-            response.getWriter().println("{milk:[{\"item\":\"milk\",\"price\":5.50,\"store\":\"california\"},{\"item\":\"milk\",\"price\":6.30,\"store\":\"oregon\"},{\"item\":\"milk\",\"price\":3.50,\"store\":\"washington\"}]}");
+            response.getWriter().println("{\"milk\":[{\"item\":\"milk\",\"price\":5.50,\"store\":\"california\"},{\"item\":\"milk\",\"price\":6.30,\"store\":\"oregon\"},{\"item\":\"milk\",\"price\":3.50,\"store\":\"washington\"}]}");
             break;
         case "apple" :
-            response.getWriter().println("{apples:[{\"item\":\"apple\",\"price\":4.20,\"store\":\"california\"},{\"item\":\"apple\",\"price\":3.30,\"store\":\"oregon\"},{\"item\":\"appple\",\"price\":3.80,\"store\":\"washington\"}]}");
+            response.getWriter().println("{\"apples\":[{\"item\":\"apple\",\"price\":4.20,\"store\":\"california\"},{\"item\":\"apple\",\"price\":3.30,\"store\":\"oregon\"},{\"item\":\"appple\",\"price\":3.80,\"store\":\"washington\"}]}");
             break;
         default :
-            response.getWriter().println("error");            
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);          
       }
 
     }
