@@ -15,11 +15,12 @@
         <br>
         <br>
         <div>
-            <form action="/form-handler" method="POST">
+
+            <form>
                 <h2 style="color: #0A6644">Add to your Shopping List</h2>
-                <input type="text" name="text-input" placeholder="  Enter Item.." style="border-radius: 20px; color: #0A6644; width: 300px; height: 30px;">
-                <input type="submit" />
-            </form>
+                <input id="item-name" type="text" name="text-input"  placeholder="  Enter Item.." style="border-radius: 20px; color: #0A6644; width: 300px; height: 30px;">
+                <input type="button" value = "submit" onclick="addToCart()"/>                
+                            </form>
             <p>Calculate item price and total prices</p>
             <button onclick="calculate();">Calculate</button>
         </div>
