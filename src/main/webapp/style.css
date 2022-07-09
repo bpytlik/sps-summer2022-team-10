@@ -7,3 +7,11 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+table {
+    width: 50%;
+}
+
+th, td {
+    text-align: center;
+}
