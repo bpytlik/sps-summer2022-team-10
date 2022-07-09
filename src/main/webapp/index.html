@@ -2,42 +2,37 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="https://kit.fontawesome.com/848c0f5fe3.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="../style.css">
-        <script src="script.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="script.js" ></script>
         <title>Logo: Shopping List</title>
     </head>
     <body style="background-color: #D0E4CF">
-        <div>
-            <h1 style="color: #0A6644">Welcome Back, John Doe</h1>
-            <h2 style="color: #0A6644">What's On Your Mind?</h2>
+        <div style="text-align: center">
+            <h1 style="color: #0A6644; font-family: 'DM Sans', sans-serif; font: bolder">Welcome Back, John Doe</h1>
+            <p style="color: #0A6644; font-family: 'DM Sans', sans-serif; font-size: 150%">What's On Your Mind?</p>
         </div>
         <br>
         <br>
-        <div>
-            <form>
-                <h2 style="color: #0A6644">Add to your Shopping List</h2>
-                <input id="item-name" type="text" name="text-input"  placeholder="  Enter Item.." style="border-radius: 20px; color: #0A6644; width: 300px; height: 30px;">
-                <input type="button" value = "submit" onclick="addToCart()"/>                
-                
+        <div style="text-align: center">
+            <h2 style="color: #0A6644; font-family: 'DM Sans', sans-serif; font: bolder">Add to your Shopping List:</h2>
+            <form action="/form-handler" method="POST">
+                <input name="text-input" placeholder="Enter Item" style="border-radius: 15px; width: 300px; height: 20px; border-color:#0A6644; padding: 5px; padding-left: 15px; font-family: 'DM Sans', sans-serif"></input>
+                <input type="button" value="Submit" onclick="addToCart()" style="border-radius: 10px; background-color: white; border-color:#0A6644; height: 25px; width: 70px; font-family: 'DM Sans', sans-serif" />
             </form>
-            <p>Calculate item price and total prices</p>
-            <button onclick="calculate();">Calculate</button>
+            <br>
+            <p style="color: #0A6644; font-family: 'DM Sans', sans-serif; font-size: 100%">Calculate item price and total prices</p>
+            <button style="border-radius: 10px; background-color: white; border-color:#0A6644; height: 25px; width: 80px; font-family: 'DM Sans', sans-serif" onclick="calculate();">Calculate</button>
         </div>
         <br>
         <br>
-        <div>
-            <h2 style="color: #0A6644">Your Shopping List</h2>
-            <li style="color: #0A6644">Item 1</li>
-            <li style="color: #0A6644">Item 2</li>
+        <div style="text-align: center">
+            <h2 style="color: #0A6644; font-family: 'DM Sans', sans-serif; font: bolder">Your Shopping List</h2>
+            <li style="color: #0A6644; font-family: 'DM Sans', sans-serif; font: bolder">Item 1</li>
+            <li style="color: #0A6644; font-family: 'DM Sans', sans-serif; font: bolder">Item 2</li>
         </div>
-        <br>
-        <br>
-        <div>
-            <h2>Price Comparison</h2>
-            <table id="comparison-table"></table>
-        </div>
-        <br>
-        <br>
     </body>
 </html>
+
