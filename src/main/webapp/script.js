@@ -22,9 +22,27 @@ function addRandomGreeting() {
   // Pick a random greeting.
   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
 
+<<<<<<< Updated upstream
   // Add it to the page.
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
+=======
+var itemList = [];
+var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
+
+async function addToCart(){
+    var list = document.getElementById('shopping-cart');
+    var itemName = document.getElementById("item-name").value;
+    var entry = document.createElement('li');
+    entry.appendChild(document.createTextNode(itemName));
+    list.appendChild(entry);
+    const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
+        method: 'POST'});
+    const newItemObject = await responseFromServer.json();
+    console.log(newItemObject);
+    itemList.push(newItemObject);
+    console.log(itemList);
+>>>>>>> Stashed changes
 }
 
 async function loadTable() {
