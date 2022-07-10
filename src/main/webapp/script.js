@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-// fetch Irene JSON string from server
-
-
 var itemList = [];
-var stores = ["california", "oregon", "washington"];  // hard-coded for now
+var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
 
 async function addToCart(){
-    const itemName = document.getElementById("item-name").value;
+    var list = document.getElementById('shopping-cart');
+    var itemName = document.getElementById("item-name").value;
+    var entry = document.createElement('li');
+    entry.appendChild(document.createTextNode(itemName));
+    list.appendChild(entry);
     const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
         method: 'POST'});
     const newItemObject = await responseFromServer.json();
