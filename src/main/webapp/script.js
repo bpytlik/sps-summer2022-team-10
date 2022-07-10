@@ -12,21 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-<<<<<<< Updated upstream
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-=======
 var itemList = [];
 var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
 
@@ -42,7 +27,6 @@ async function addToCart(){
     console.log(newItemObject);
     itemList.push(newItemObject);
     console.log(itemList);
->>>>>>> Stashed changes
 }
 
 async function loadTable() {
