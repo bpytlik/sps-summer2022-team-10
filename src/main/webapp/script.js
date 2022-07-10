@@ -80,3 +80,4 @@ async function loadTable() {
         dataTable.appendChild(rowElement);
     }
 }
+
