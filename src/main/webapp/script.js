@@ -31,7 +31,31 @@ async function addToCart(){
 
 async function calculate() {
     // Calculate totals here ...
-    const totals = [0, 0, 0];  // change this with real totals
+
+    // it can just use the global itemList array. 
+    const totals = [];  // change this with real totals
+
+    // You can loop over itemList and keep track of & add up the totals in each store.
+    var price1 = 0;
+    var price2 = 0;
+    var price3 = 0;
+
+    for (let i = 0; i < itemList.length; i++) {
+        // get price
+        const dataArr = Object.values(itemList[i])[0];
+        
+        console.log(dataArr);
+        price1 += dataArr[0].price;
+        console.log(price1);
+        price2 += dataArr[1].price;
+        price3 += dataArr[2].price;
+
+    }
+
+    totals.push(price1);
+    totals.push(price2);
+    totals.push(price3);
+
     loadTable(totals);
 }
 
