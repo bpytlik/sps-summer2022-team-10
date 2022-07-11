@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-// fetch Irene JSON string from server
-
-
 var itemList = [];
-var stores = ["california", "oregon", "washington"];  // hard-coded for now
+var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
 
 async function addToCart(){
-    const itemName = document.getElementById("item-name").value;
+    var list = document.getElementById('shopping-cart');
+    var itemName = document.getElementById("item-name").value;
+    var entry = document.createElement('li');
+    entry.appendChild(document.createTextNode(itemName));
+    list.appendChild(entry);
     const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
         method: 'POST'});
     const newItemObject = await responseFromServer.json();
@@ -31,11 +31,36 @@ async function addToCart(){
 
 async function calculate() {
     // Calculate totals here ...
-    const totals = [0, 0, 0];  // change this with real totals
+
+    // it can just use the global itemList array. 
+    const totals = [];  // change this with real totals
+
+    // You can loop over itemList and keep track of & add up the totals in each store.
+    var price1 = 0;
+    var price2 = 0;
+    var price3 = 0;
+
+    for (let i = 0; i < itemList.length; i++) {
+        // get price
+        const dataArr = Object.values(itemList[i])[0];
+        
+        console.log(dataArr);
+        price1 += dataArr[0].price;
+        console.log(price1);
+        price2 += dataArr[1].price;
+        price3 += dataArr[2].price;
+
+    }
+
+    totals.push(price1);
+    totals.push(price2);
+    totals.push(price3);
+
     loadTable(totals);
 }
 
 async function loadTable(totals) {
+    // empty table here 
     const compTable = document.getElementById('comparison-table');
 
     // adding the first row which shows store names
@@ -68,56 +93,4 @@ async function loadTable(totals) {
         rowTotals.appendChild(cell);
     }
     compTable.appendChild(rowTotals);
-}
-
-async function loadTable() {
-    // const responseFromServer = await fetch('/data-processing');
-    // const data = await responseFromServer.json();
-
-    // hardcoded for now
-    const response = '{"stores": ["A", "B", "C"], "items": ["milk", "egg", "apple"], "prices": [[1, 2, 3], [4, 5, 6], [7, 8, 9]], "totals": [12, 15, 18]}';
-    const data = JSON.parse(response);
-
-    const dataTable = document.getElementById('data-table');
-
-    for (let r = 0; r < data.items.length + 2; r++) {
-        var rowElement = document.createElement('tr');
-        for (let c = 0; c < data.stores.length + 1; c++) {
-            if (c == 0 && r == 0) {
-                const cell = document.createElement('th');
-                cell.appendChild(document.createTextNode("Item"));
-                rowElement.appendChild(cell);
-            }
-            else if (c == 0 && r == data.items.length + 1) {
-                const cell = document.createElement('th');
-                cell.appendChild(document.createTextNode("Total"));
-                rowElement.appendChild(cell);
-            }
-            // handle store names
-            else if (r == 0) {
-                const cell = document.createElement('th');
-                cell.appendChild(document.createTextNode(data.stores[c-1]));
-                rowElement.appendChild(cell);
-            }
-            // handle item names
-            else if (c == 0) {
-                const cell = document.createElement('th');
-                cell.appendChild(document.createTextNode(data.items[r-1]));
-                rowElement.appendChild(cell);
-            }
-            // handle totals
-            else if (r == data.items.length + 1) {
-                const cell = document.createElement('th');
-                cell.appendChild(document.createTextNode(data.totals[c-1]));
-                rowElement.appendChild(cell);
-            }
-            // handle individual prices
-            else {
-                const cell = document.createElement('td');
-                cell.appendChild(document.createTextNode(data.prices[r-1][c-1]));
-                rowElement.appendChild(cell);
-            }
-        }
-        dataTable.appendChild(rowElement);
-    }
 }
