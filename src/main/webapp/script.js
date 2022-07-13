@@ -14,6 +14,7 @@
 
 var itemList = [];
 var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
+var products="";
 
 async function addToCart(){
     var list = document.getElementById('shopping-cart');
@@ -93,3 +94,48 @@ async function loadTable(totals) {
     }
     compTable.appendChild(rowTotals);
 }
+
+function getToken() {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.kroger.com/v1/connect/oauth2/token",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Basic aW5mbGF0aW9uZ3JvY2VyeWFwcC1kZWM4YTdmZjczZTlhZDRhYWI2ZmE3MGZhZGYyNzdlMTI5Njk1MTgwMzM3MDIzNTE2NjM6OEgyWXdZbjhJRFRLbEs0VFBXZEVEUnpWMjRLd1lZdi1sN0RFRzYxSA=="
+      },
+      "data": {
+        "grant_type": "client_credentials",
+        "scope": "{{scope}}"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
+  }
+
+    function getProduct() {
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.kroger.com/v1/products?filter.term=milk&filter.locationId=70500894",
+        "method": "GET",
+        "headers": {
+          "Accept": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1Nzc0ODM2NywiaWF0IjoxNjU3NzQ2NTYyLCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3NzQ2NTY3NDQ5NzgzMzIyLCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.P-kdfMPVGG7gglln7Uk2P-gt7xvG9y6gRMr6f_MVrO2odzYpg7W1woqvKzz3LbxdGNL2gQIT3MuQaSVGzkR6dG42CfKv7GLzPwvwrl0L0aDsFgJyOhg5k3juBg5ptxH_qHV55TYP7ftbZxcNkqI2SvVqJRrwnBrDIWDpTFaD7HijNazYvFgG1ILeN_PDVe7Wt9Y25TbFYyTvMazQ4t3RL1zrsku5OoIiZuCihnBZ2CqzLbgD5rufK5mKV_D3rVrU_e1auoCSNxd4XDcYjhoPCS6b25nF6f-KrHUfieG8dBC1RzKooi9t2mXabvnggJwKaUw1kMaARttdiPMHyYHJ_g"
+        }
+      }
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);      
+        products = response;
+      });    
+      
+    }
+
+  function getCheapProductOneStore(){    
+      
+    console.log( products.data[0].items[0].price.regular);
+  }
