@@ -60,6 +60,7 @@ async function calculate() {
 }
 
 async function loadTable(totals) {
+    // empty table here 
     const compTable = document.getElementById('comparison-table');
 
     // adding the first row which shows store names
