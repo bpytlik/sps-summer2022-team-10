@@ -15,22 +15,30 @@
 var itemList = [];
 var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
 var products="";
-var cheapProductArray=[];
+// var cheapProductArray=[];
+var allCheapProductArray=[];
 
 async function addToCart(){
     var list = document.getElementById('shopping-cart');
-    var cheapProduct={};
+    var cheapProductFirstStore={};
+    var cheapProductSecondStore={};
+    var cheapProductThirdStor={};
+    var newCheapProductArray=[];
     var itemName = document.getElementById("item-name").value;
     var entry = document.createElement('li');
     entry.appendChild(document.createTextNode(itemName));
     list.appendChild(entry);
-    cheapProduct = getCheapProductOneStore(itemName,"70500894")
-    cheapProductArray.push(cheapProduct);
-    console.log("getCheapProductOneStore()");
-    console.log(cheapProduct);
-    console.log("cheapProductArray");
-    console.log(cheapProductArray);
-    
+    cheapProductFirstStore = getCheapProductOneStore(itemName,"70500894")
+    cheapProductSecondStore= getCheapProductOneStore(itemName,"70100391")
+    cheapProductThirdStore= getCheapProductOneStore(itemName,"70500828")
+    newCheapProductArray.push(cheapProductFirstStore);
+    newCheapProductArray.push(cheapProductSecondStore);
+    newCheapProductArray.push(cheapProductThirdStore);
+    console.log("newCheapProductArray");
+    console.log(newCheapProductArray);
+    allCheapProductArray.push(newCheapProductArray);
+    console.log("allCheapProductArray");
+    console.log(allCheapProductArray);
 
     
     // console.log(cheapProductArray);
@@ -136,7 +144,7 @@ function getToken() {
       "method": "GET",
       "headers": {
         "Accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1Nzc3OTQyNiwiaWF0IjoxNjU3Nzc3NjIxLCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3Nzc3NjI2Njg3MDkzNTcyLCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.G-m6vUxGW1ngzgwhLi9OTG5z8L6MXScGNOjOr8itELNcN4qFb46AQlap_5kDaKJWY7Pr6Trdm__Y7DzRRUhUHGaVVaKaE6P4Mg0G3wD94Qquk9h82Q8exABlnUXaY4L-JLYOPTCQFw5DIGCCxjeUsxdMhWfIdFaBTgWnO1KFPYoC4KBopTYVcY8dAcQxTQ4l0d3ZMUj3Nok6A_16fjvZpCJBVwky3IhsfjRi74i3UvqiIS80EJ8kW-chby51UmkcCmtjKLBox_5c_8hha1spJ7bjcmzbpWp_7JNci9CH1xAXtDqNxOKdmKGIFxODX5H94FPTfD4_MUis_btOedjCMQ"
+        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1NzgyMzIzNCwiaWF0IjoxNjU3ODIxNDI5LCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3ODIxNDM0Mjc1OTc2ODkzLCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.kvsvy6Sm7zUIUWCnpZUclcEMJDDRXJJqaCjFhi-3Ol5X6zYqQj8WvnxD2rhFbBuSHKlUfp09bx-egNSd41inTAS9E_T5DZHdwLh797Uo5cObLkvcwS676hXVi8PYfE5nxLyxtN6su8eTt1I0CU-t2uobpkGOnSDxz6pbraxcxUS3OtP5hl6s5mgXzEINb68HLWDcZvf7RV3YXUlfYEB9tuo_4_IUbxFkd_cdiO_kBQtzStRIZycnP2sIrnYgHAZ5YmbgiTpb9GtmrWJWxgRJtQ8vU6j8FYlBVDwnO281wuYisGjQUPG2VsmKyZ3zXY4EAAhDIXR3T-XVlp_OCNo6_Q"
       }
     }
 
@@ -149,13 +157,18 @@ function getToken() {
   }
 
   function getCheapProductOneStore(itemName, locationId){    
-    getProduct(itemName, locationId);      
-    console.log( "products length: "+ products.data.length);
+    getProduct(itemName, locationId);
+
+    console.log("products");
+    console.log(products);
 
     var productsDictArray=[];
-      console.log(products.data[0].items[0].price.regular);
+    var priceDictArray=[];
+      
       for (let i = 0; i < products.data.length; i++) {
+          if (products.data[i].items[0].size == "1 gal"||products.data[i].items[0].size == "1 lb"||products.data[i].items[0].size == "12 ct"){
         var productDict = {
+          location:locationId,
           itemDescription: products.data[i].description,
           itemPrice: products.data[i].items[0].price.regular,
           itemSize: products.data[i].items[0].size,
@@ -165,7 +178,15 @@ function getToken() {
         console.log("productDict");
         console.log(productDict);
       }
-      console.log("productsDictArray[0]");
-      console.log(productsDictArray[0]);
-      return productsDictArray[0]
+    }
+    for (let i = 0; i < productsDictArray.length; i++){
+        priceDictArray.push(productsDictArray[i].itemPrice);
+    }
+    var min = Math.min(...priceDictArray);
+
+    var index = priceDictArray.indexOf(min);
+
+    //   console.log("productsDictArray[index]");
+    //   console.log(productsDictArray[index]);
+      return productsDictArray[index]
   }
