@@ -15,19 +15,31 @@
 var itemList = [];
 var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
 var products="";
+var cheapProductArray=[];
 
 async function addToCart(){
     var list = document.getElementById('shopping-cart');
+    var cheapProduct={};
     var itemName = document.getElementById("item-name").value;
     var entry = document.createElement('li');
     entry.appendChild(document.createTextNode(itemName));
     list.appendChild(entry);
-    const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
-        method: 'POST'});
-    const newItemObject = await responseFromServer.json();
-    console.log(newItemObject);
-    itemList.push(newItemObject);
-    console.log(itemList);
+    cheapProduct = getCheapProductOneStore(itemName,"70500894")
+    cheapProductArray.push(cheapProduct);
+    console.log("getCheapProductOneStore()");
+    console.log(cheapProduct);
+    console.log("cheapProductArray");
+    console.log(cheapProductArray);
+    
+
+    
+    // console.log(cheapProductArray);
+    // const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
+    //     method: 'POST'});
+    // const newItemObject = await responseFromServer.json();
+    // console.log(newItemObject);
+    // itemList.push(newItemObject);
+    // console.log(itemList);
 }
 
 async function calculate() {
@@ -116,26 +128,44 @@ function getToken() {
     });
   }
 
-    function getProduct() {
-      var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.kroger.com/v1/products?filter.term=milk&filter.locationId=70500894",
-        "method": "GET",
-        "headers": {
-          "Accept": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1Nzc0ODM2NywiaWF0IjoxNjU3NzQ2NTYyLCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3NzQ2NTY3NDQ5NzgzMzIyLCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.P-kdfMPVGG7gglln7Uk2P-gt7xvG9y6gRMr6f_MVrO2odzYpg7W1woqvKzz3LbxdGNL2gQIT3MuQaSVGzkR6dG42CfKv7GLzPwvwrl0L0aDsFgJyOhg5k3juBg5ptxH_qHV55TYP7ftbZxcNkqI2SvVqJRrwnBrDIWDpTFaD7HijNazYvFgG1ILeN_PDVe7Wt9Y25TbFYyTvMazQ4t3RL1zrsku5OoIiZuCihnBZ2CqzLbgD5rufK5mKV_D3rVrU_e1auoCSNxd4XDcYjhoPCS6b25nF6f-KrHUfieG8dBC1RzKooi9t2mXabvnggJwKaUw1kMaARttdiPMHyYHJ_g"
-        }
+  function getProduct(itemName, locationId) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.kroger.com/v1/products?filter.term="+itemName+"&filter.locationId="+ locationId,
+      "method": "GET",
+      "headers": {
+        "Accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1Nzc3OTQyNiwiaWF0IjoxNjU3Nzc3NjIxLCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3Nzc3NjI2Njg3MDkzNTcyLCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.G-m6vUxGW1ngzgwhLi9OTG5z8L6MXScGNOjOr8itELNcN4qFb46AQlap_5kDaKJWY7Pr6Trdm__Y7DzRRUhUHGaVVaKaE6P4Mg0G3wD94Qquk9h82Q8exABlnUXaY4L-JLYOPTCQFw5DIGCCxjeUsxdMhWfIdFaBTgWnO1KFPYoC4KBopTYVcY8dAcQxTQ4l0d3ZMUj3Nok6A_16fjvZpCJBVwky3IhsfjRi74i3UvqiIS80EJ8kW-chby51UmkcCmtjKLBox_5c_8hha1spJ7bjcmzbpWp_7JNci9CH1xAXtDqNxOKdmKGIFxODX5H94FPTfD4_MUis_btOedjCMQ"
       }
-
-      $.ajax(settings).done(function (response) {
-        console.log(response);      
-        products = response;
-      });    
-      
     }
 
-  function getCheapProductOneStore(){    
-      
-    console.log( products.data[0].items[0].price.regular);
+    $.ajax(settings).done(function (response) {
+    //   console.log(response);
+      products = response;
+      // console.log(products[0]);
+    });
+
+  }
+
+  function getCheapProductOneStore(itemName, locationId){    
+    getProduct(itemName, locationId);      
+    console.log( "products length: "+ products.data.length);
+
+    var productsDictArray=[];
+      console.log(products.data[0].items[0].price.regular);
+      for (let i = 0; i < products.data.length; i++) {
+        var productDict = {
+          itemDescription: products.data[i].description,
+          itemPrice: products.data[i].items[0].price.regular,
+          itemSize: products.data[i].items[0].size,
+          itemImage: products.data[i].images[0].sizes[0].url
+        }
+        productsDictArray.push(productDict);
+        console.log("productDict");
+        console.log(productDict);
+      }
+      console.log("productsDictArray[0]");
+      console.log(productsDictArray[0]);
+      return productsDictArray[0]
   }
