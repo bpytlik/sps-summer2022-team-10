@@ -12,17 +12,85 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+var itemList = [];
+var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+async function addToCart(){
+    var list = document.getElementById('shopping-cart');
+    var itemName = document.getElementById("item-name").value;
+    var entry = document.createElement('li');
+    entry.appendChild(document.createTextNode(itemName));
+    list.appendChild(entry);
+    const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
+        method: 'POST'});
+    const newItemObject = await responseFromServer.json();
+    console.log(newItemObject);
+    itemList.push(newItemObject);
+    console.log(itemList);
+}
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+async function calculate() {
+    // Calculate totals here ...
+
+    // it can just use the global itemList array. 
+    const totals = [];  // change this with real totals
+
+    // You can loop over itemList and keep track of & add up the totals in each store.
+    var price1 = 0;
+    var price2 = 0;
+    var price3 = 0;
+
+    for (let i = 0; i < itemList.length; i++) {
+        // get price
+        const dataArr = Object.values(itemList[i])[0];
+        
+        console.log(dataArr);
+        price1 += dataArr[0].price;
+        console.log(price1);
+        price2 += dataArr[1].price;
+        price3 += dataArr[2].price;
+
+    }
+
+    totals.push(price1);
+    totals.push(price2);
+    totals.push(price3);
+
+    loadTable(totals);
+}
+
+async function loadTable(totals) {
+    // empty table here 
+    const compTable = document.getElementById('comparison-table');
+
+    // adding the first row which shows store names
+    const rowStores = document.createElement('tr');
+    for (let i = 0; i < stores.length; i++) {
+        const cell = document.createElement('th');
+        cell.appendChild(document.createTextNode(stores[i]));
+        rowStores.appendChild(cell);
+    }
+    compTable.appendChild(rowStores);
+
+    // add following rows to show item and price in each store
+    for (let i = 0; i < itemList.length; i++) {
+        const rowItem = document.createElement('tr');
+        // get info of one shopping item in all stores
+        const dataArr = Object.values(itemList[i])[0];
+        for (let j = 0; j < dataArr.length; j++) {
+            const cell = document.createElement('td');
+            cell.appendChild(document.createTextNode(dataArr[j].item + " $" + dataArr[j].price));
+            rowItem.appendChild(cell);
+        }
+        compTable.appendChild(rowItem);
+    }
+
+    // add the last row to show total prices in each store
+    const rowTotals = document.createElement('tr');
+    for (let i = 0; i < totals.length; i++) {
+        const cell = document.createElement('th');
+        cell.appendChild(document.createTextNode("Total: $" + totals[i]));
+        rowTotals.appendChild(cell);
+    }
+    compTable.appendChild(rowTotals);
 }

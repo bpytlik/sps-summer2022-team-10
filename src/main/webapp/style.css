@@ -7,3 +7,78 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+table {
+    width: 50%;
+}
+
+th, td {
+    text-align: center;
+}
+
+h1 {
+  color: #0A6644; 
+  font-family: 'DM Sans', sans-serif; 
+  font: bolder
+}
+
+h2 {
+  color: #0A6644; 
+  font-family: 'DM Sans', sans-serif; 
+  font: bolder
+}
+
+p {
+  color: #0A6644; 
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 150%
+}
+
+#item-name {
+  border-radius: 15px; 
+  width: 300px; 
+  height: 20px; 
+  border-color:#0A6644; 
+  padding: 5px; 
+  padding-left: 15px; 
+  font-family: 'DM Sans', sans-serif
+}
+
+#submit-button {
+  border-radius: 10px; 
+  background-color: white; 
+  border-color:#0A6644; 
+  height: 25px; 
+  width: 70px; 
+  font-family: 'DM Sans', sans-serif
+}
+
+button {
+  border-radius: 10px; 
+  background-color: white; 
+  border-color:#0A6644; 
+  height: 25px; 
+  width: 80px; 
+  font-family: 'DM Sans', sans-serif
+}
+
+#div1 {
+  display: flex; 
+  justify-content: center
+}
+
+#shopping-cart { 
+  color: #0A6644; 
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 100%
+}
+
+#comparison-table { 
+  color: #0A6644; 
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 100%
+}
+
+#div2 {
+  text-align: center;
+}

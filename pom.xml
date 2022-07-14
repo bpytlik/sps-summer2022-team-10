@@ -38,7 +38,14 @@
       <artifactId>jetty-annotations</artifactId>
       <version>${jetty.version}</version>
     </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.9.0</version>
+    </dependency>
   </dependencies>
+
+
 
   <build>
     <plugins>
@@ -109,3 +116,5 @@
     </plugins>
   </build>
 </project>
+
+
