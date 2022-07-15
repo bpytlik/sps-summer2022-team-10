@@ -7,40 +7,46 @@
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src="script.js" ></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <title>Logo: Shopping List</title>
     </head>
     <body style="background-color: #D0E4CF">
-        <div style="text-align: center">
-            <h1 style="color: #0A6644; font-family: 'DM Sans', sans-serif; font: bolder">Welcome to Grocery Hero</h1>
-            <p style="color: #0A6644; font-family: 'DM Sans', sans-serif; font-size: 150%">Start Shopping</p>
+
+        <div id="div2">
+            <h1>Welcome Back, John Doe</h1>
+            <p>What's On Your Mind?</p>
         </div>
         <br>
         <br>
-        <div style="text-align: center">
-            <h2 style="color: #0A6644; font-family: 'DM Sans', sans-serif; font: bolder">Add to your Shopping List:</h2>
+        <div id="div2">
+            <h2>Add to your Shopping List:</h2>
             <form>
-                <input id="item-name" type="text" placeholder="Enter Item" style="border-radius: 15px; width: 300px; height: 20px; border-color:#0A6644; padding: 5px; padding-left: 15px; font-family: 'DM Sans', sans-serif"></input>
-                <input type="button" value="Submit" onclick="addToCart()" style="border-radius: 10px; background-color: white; border-color:#0A6644; height: 25px; width: 70px; font-family: 'DM Sans', sans-serif"></input>
+                <input id="item-name" type="text" placeholder="Enter Item" ></input>
+                <input id="submit-button" type="button" value="Submit" onclick="addToCart()"></input>
             </form>
             <br>
-            <p style="color: #0A6644; font-family: 'DM Sans', sans-serif; font-size: 100%">Calculate item price and total prices</p>
-            <button style="border-radius: 10px; background-color: white; border-color:#0A6644; height: 25px; width: 80px; font-family: 'DM Sans', sans-serif" onclick="calculate();">Calculate</button>
+            <p>Calculate item price and total prices</p>
+            <button onclick="calculate();">Calculate</button>
         </div>
         <br>
         <br>
-        <div style="text-align: center">
-            <h2 style="color: #0A6644; font-family: 'DM Sans', sans-serif; font: bolder">Your Shopping List</h2>
+        <div id="div2">
+            <h2>Your Shopping List</h2>
         </div>
-        <div style="display: flex; justify-content: center">
-            <ol id="shopping-cart" style="color: #0A6644; font-family: 'DM Sans', sans-serif; font-size: 100%">
+        <div id="div1">
+            <ol id="shopping-cart">
             </ol>
         </div>
-        <div style="display: flex; justify-content: center">
-            <h2 style="color: #0A6644; font-family: 'DM Sans', sans-serif; font: bolder">Price Comparison</h2>
+        <div id="div2">
+            <h2>Price Comparison</h2>
         </div>
-        <div style="display: flex; justify-content: center">
-            <table id="comparison-table" style="color: #0A6644; font-family: 'DM Sans', sans-serif; font-size: 100%"></table>
-        <a href= "home.html" >Go to Home</a>
+        <div>
+            <table id="comparison-table"></table>
         </div>
+        <h4>Irene Testing button</h4>>
+        <button onclick="getToken()">GetToken</button>
+        <button onclick="getProduct()">GetProduct</button>
+        <button onclick="getCheapProductOneStore()">GetCheapProduct</button>
     </body>
 </html>
