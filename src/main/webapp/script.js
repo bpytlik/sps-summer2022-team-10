@@ -14,19 +14,40 @@
 
 var itemList = [];
 var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
+var products="";
+// var cheapProductArray=[];
+var allCheapProductArray=[];
 
 async function addToCart(){
     var list = document.getElementById('shopping-cart');
+    var cheapProductFirstStore={};
+    var cheapProductSecondStore={};
+    var cheapProductThirdStor={};
+    var newCheapProductArray=[];
     var itemName = document.getElementById("item-name").value;
     var entry = document.createElement('li');
     entry.appendChild(document.createTextNode(itemName));
     list.appendChild(entry);
-    const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
-        method: 'POST'});
-    const newItemObject = await responseFromServer.json();
-    console.log(newItemObject);
-    itemList.push(newItemObject);
-    console.log(itemList);
+    cheapProductFirstStore = getCheapProductOneStore(itemName,"70500894")
+    cheapProductSecondStore= getCheapProductOneStore(itemName,"70100391")
+    cheapProductThirdStore= getCheapProductOneStore(itemName,"70500828")
+    newCheapProductArray.push(cheapProductFirstStore);
+    newCheapProductArray.push(cheapProductSecondStore);
+    newCheapProductArray.push(cheapProductThirdStore);
+    console.log("newCheapProductArray");
+    console.log(newCheapProductArray);
+    allCheapProductArray.push(newCheapProductArray);
+    console.log("allCheapProductArray");
+    console.log(allCheapProductArray);
+
+    
+    // console.log(cheapProductArray);
+    // const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
+    //     method: 'POST'});
+    // const newItemObject = await responseFromServer.json();
+    // console.log(newItemObject);
+    // itemList.push(newItemObject);
+    // console.log(itemList);
 }
 
 async function calculate() {
@@ -94,3 +115,79 @@ async function loadTable(totals) {
     }
     compTable.appendChild(rowTotals);
 }
+
+function getToken() {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.kroger.com/v1/connect/oauth2/token",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Basic aW5mbGF0aW9uZ3JvY2VyeWFwcC1kZWM4YTdmZjczZTlhZDRhYWI2ZmE3MGZhZGYyNzdlMTI5Njk1MTgwMzM3MDIzNTE2NjM6OEgyWXdZbjhJRFRLbEs0VFBXZEVEUnpWMjRLd1lZdi1sN0RFRzYxSA=="
+      },
+      "data": {
+        "grant_type": "client_credentials",
+        "scope": "{{scope}}"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
+  }
+
+  function getProduct(itemName, locationId) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.kroger.com/v1/products?filter.term="+itemName+"&filter.locationId="+ locationId,
+      "method": "GET",
+      "headers": {
+        "Accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1NzgyMzIzNCwiaWF0IjoxNjU3ODIxNDI5LCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3ODIxNDM0Mjc1OTc2ODkzLCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.kvsvy6Sm7zUIUWCnpZUclcEMJDDRXJJqaCjFhi-3Ol5X6zYqQj8WvnxD2rhFbBuSHKlUfp09bx-egNSd41inTAS9E_T5DZHdwLh797Uo5cObLkvcwS676hXVi8PYfE5nxLyxtN6su8eTt1I0CU-t2uobpkGOnSDxz6pbraxcxUS3OtP5hl6s5mgXzEINb68HLWDcZvf7RV3YXUlfYEB9tuo_4_IUbxFkd_cdiO_kBQtzStRIZycnP2sIrnYgHAZ5YmbgiTpb9GtmrWJWxgRJtQ8vU6j8FYlBVDwnO281wuYisGjQUPG2VsmKyZ3zXY4EAAhDIXR3T-XVlp_OCNo6_Q"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+    //   console.log(response);
+      products = response;
+      // console.log(products[0]);
+    });
+
+  }
+
+  function getCheapProductOneStore(itemName, locationId){    
+    getProduct(itemName, locationId);
+
+    console.log("products");
+    console.log(products);
+
+    var productsDictArray=[];
+    var priceDictArray=[];
+      
+      for (let i = 0; i < products.data.length; i++) {
+          if (products.data[i].items[0].size == "1 gal"||products.data[i].items[0].size == "1 lb"||products.data[i].items[0].size == "12 ct"){
+        var productDict = {
+          location:locationId,
+          itemDescription: products.data[i].description,
+          itemPrice: products.data[i].items[0].price.regular,
+          itemSize: products.data[i].items[0].size,
+          itemImage: products.data[i].images[0].sizes[0].url
+        }
+        productsDictArray.push(productDict);
+        console.log("productDict");
+        console.log(productDict);
+      }
+    }
+    for (let i = 0; i < productsDictArray.length; i++){
+        priceDictArray.push(productsDictArray[i].itemPrice);
+    }
+    var min = Math.min(...priceDictArray);
+
+    var index = priceDictArray.indexOf(min);
+
+    //   console.log("productsDictArray[index]");
+    //   console.log(productsDictArray[index]);
+      return productsDictArray[index]
+  }
