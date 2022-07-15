@@ -1,8 +1,5 @@
 package com.google.sps.servlets;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /** Handles Kroger API, send requests to API and get the data  */
 /** Take user input and use the input to return data from Kroger API  */
+
 @WebServlet("/item-lookup")
 public class DataServlet extends HttpServlet {
    
-
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
   
@@ -23,7 +20,6 @@ public class DataServlet extends HttpServlet {
       String textValue = request.getParameter("item_name");
       response.setContentType("text/html;");
       
-    
       switch(textValue) {
         case "egg" :
             response.getWriter().println("{\"eggs\":[{\"item\":\"egg\",\"price\":4.50,\"store\":\"california\"},{\"item\":\"egg\",\"price\":5.50,\"store\":\"oregon\"},{\"item\":\"egg\",\"price\":3.50,\"store\":\"washington\"}]}");
