@@ -28,9 +28,9 @@ async function addToCart(){
     var entry = document.createElement('li');
     entry.appendChild(document.createTextNode(itemName));
     list.appendChild(entry);
-    cheapProductFirstStore = getCheapProductOneStore(itemName,"70500828")
-    cheapProductSecondStore= getCheapProductOneStore(itemName,"66000103")
-    cheapProductThirdStore= getCheapProductOneStore(itemName,"70400352")
+    cheapProductFirstStore = await getCheapProductOneStore(itemName,"70500828")
+    cheapProductSecondStore= await getCheapProductOneStore(itemName,"66000103")
+    cheapProductThirdStore= await getCheapProductOneStore(itemName,"70400352")
     newCheapProductArray.push(cheapProductFirstStore);
     newCheapProductArray.push(cheapProductSecondStore);
     newCheapProductArray.push(cheapProductThirdStore);
