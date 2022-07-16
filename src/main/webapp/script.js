@@ -51,37 +51,33 @@ async function addToCart(){
 }
 
 async function calculate() {
-    // Calculate totals here ...
+    const totals = [];
 
-    // it can just use the global itemList array. 
-    const totals = [];  // change this with real totals
+    var total1 = 0;
+    var total2 = 0;
+    var total3 = 0;
 
-    // You can loop over itemList and keep track of & add up the totals in each store.
-    var price1 = 0;
-    var price2 = 0;
-    var price3 = 0;
-
-    for (let i = 0; i < itemList.length; i++) {
+    for (let i = 0; i < allCheapProductArray.length; i++) {
         // get price
-        const dataArr = Object.values(itemList[i])[0];
-        
+        const dataArr = allCheapProductArray[i];
         console.log(dataArr);
-        price1 += dataArr[0].price;
-        console.log(price1);
-        price2 += dataArr[1].price;
-        price3 += dataArr[2].price;
+        total1 += dataArr[0].itemPrice;
+        total2 += dataArr[1].itemPrice;
+        total3 += dataArr[2].itemPrice;
 
     }
 
-    totals.push(price1);
-    totals.push(price2);
-    totals.push(price3);
+    totals.push(total1);
+    totals.push(total2);
+    totals.push(total3);
 
     loadTable(totals);
 }
 
 async function loadTable(totals) {
     const compTable = document.getElementById('comparison-table');
+
+    compTable.innerHTML = "";
 
     // adding the first row which shows store names
     const rowStores = document.createElement('tr');
@@ -93,13 +89,28 @@ async function loadTable(totals) {
     compTable.appendChild(rowStores);
 
     // add following rows to show item and price in each store
-    for (let i = 0; i < itemList.length; i++) {
+    for (let i = 0; i < allCheapProductArray.length; i++) {
         const rowItem = document.createElement('tr');
         // get info of one shopping item in all stores
-        const dataArr = Object.values(itemList[i])[0];
+        const dataArr = allCheapProductArray[i];
         for (let j = 0; j < dataArr.length; j++) {
             const cell = document.createElement('td');
-            cell.appendChild(document.createTextNode(dataArr[j].item + " $" + dataArr[j].price));
+
+            const picture = document.createElement('img');
+            picture.src = dataArr[j].itemImage;
+            picture.className = "item-image";
+
+            const description = document.createElement('div');
+            description.appendChild(document.createTextNode(dataArr[j].itemDescription));
+            description.className = "item-description";
+            const sizePrice = document.createElement('div');
+            sizePrice.appendChild(document.createTextNode(dataArr[j].itemSize + ", $" + dataArr[j].itemPrice));
+            sizePrice.className = "item-size-price";
+
+            cell.appendChild(picture);
+            cell.appendChild(description);
+            cell.appendChild(sizePrice);
+
             rowItem.appendChild(cell);
         }
         compTable.appendChild(rowItem);
@@ -109,7 +120,8 @@ async function loadTable(totals) {
     const rowTotals = document.createElement('tr');
     for (let i = 0; i < totals.length; i++) {
         const cell = document.createElement('th');
-        cell.appendChild(document.createTextNode("Total: $" + totals[i]));
+        const currTot = Math.round((totals[i] + Number.EPSILON) * 100) / 100;
+        cell.appendChild(document.createTextNode("Total: $" + currTot));
         rowTotals.appendChild(cell);
     }
     compTable.appendChild(rowTotals);
@@ -144,7 +156,7 @@ function getToken() {
       "method": "GET",
       "headers": {
         "Accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1NzkwMjc1MCwiaWF0IjoxNjU3OTAwOTQ1LCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3OTAwOTUwNjE5OTUyODU0LCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.IA7oxhe7M9bM2wDRG1nSpmVbL7Y8RjckvuP-ceLbkrTGFmWKBdSb9VyvNpMEp6hyShS7WmXcX5PhyAD2nfaVLQAn362LNtjHqlAW8PulrF9jmkM9M7ImLdKauRIyhU65Tak7bw4KqI5fdE8QJzzW4_8rJq6pRPPMyTrAFpQ5390k_BpT4W1WCfzJjUBOlXT3UxWVAv8_4vwPFe8pxtLma25BiHkzkqMK8NDFZnRx9P2turaSPsG-UOQQyeq_hLp1-Bv51Essy1cRuSSSXlOvTJr7YniynXA3k14-s8Wb3LTC0rC05vPuqxjzYKRv8PxF2JN7HKcNn6WYQCRyn0W7Yw"
+        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1ODAxMTQ3NiwiaWF0IjoxNjU4MDA5NjcxLCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU4MDA5Njc2OTI1MzE1NDA1LCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.wM8RInYwnezeDGUaMjTGgwhcWIhA6our5Bk4nXtUDUX5RVXNBjIRr7FXDPYR9gm_UsRfXAWBUc6z_DZPa-3rVN_MDndfuPshMc2wm_vliKAg_-yrGkTCu0AUprCd2ha3rZDGj12trJQqKfrbOmqfNHgOvepejPzWEhcS13JSdR_rEhkfSyzwqhNEbi8wOASbZwDZjqjqJLgBQwqfzpNMpKaa7WkIK3iwByLFKs9gAtjpv48vCojk3SMv3V5tBcrSnkzATfnd5uOkvU-LhMGU1Vy9DZ3SfDtnNPJ02cnaEfGmP5X62JoTa0o1mdRIUj6WHAgQ5M7sCPfWsRacI5dpoQ"
       }
     }
 
