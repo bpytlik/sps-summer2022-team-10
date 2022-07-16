@@ -13,7 +13,7 @@
 // limitations under the License.
 
 var itemList = [];
-var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
+var stores = ["QFC", "FRYS", "FOODSCO"];  
 var products="";
 // var cheapProductArray=[];
 var allCheapProductArray=[];
@@ -28,9 +28,9 @@ async function addToCart(){
     var entry = document.createElement('li');
     entry.appendChild(document.createTextNode(itemName));
     list.appendChild(entry);
-    cheapProductFirstStore = getCheapProductOneStore(itemName,"70500894")
-    cheapProductSecondStore= getCheapProductOneStore(itemName,"70100391")
-    cheapProductThirdStore= getCheapProductOneStore(itemName,"70500828")
+    cheapProductFirstStore = await getCheapProductOneStore(itemName,"70500828")
+    cheapProductSecondStore= await getCheapProductOneStore(itemName,"66000103")
+    cheapProductThirdStore= await getCheapProductOneStore(itemName,"70400352")
     newCheapProductArray.push(cheapProductFirstStore);
     newCheapProductArray.push(cheapProductSecondStore);
     newCheapProductArray.push(cheapProductThirdStore);
@@ -136,7 +136,7 @@ function getToken() {
     });
   }
 
-  function getProduct(itemName, locationId) {
+  async function getProduct(itemName, locationId) {
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -144,20 +144,20 @@ function getToken() {
       "method": "GET",
       "headers": {
         "Accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1NzgyMzIzNCwiaWF0IjoxNjU3ODIxNDI5LCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3ODIxNDM0Mjc1OTc2ODkzLCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.kvsvy6Sm7zUIUWCnpZUclcEMJDDRXJJqaCjFhi-3Ol5X6zYqQj8WvnxD2rhFbBuSHKlUfp09bx-egNSd41inTAS9E_T5DZHdwLh797Uo5cObLkvcwS676hXVi8PYfE5nxLyxtN6su8eTt1I0CU-t2uobpkGOnSDxz6pbraxcxUS3OtP5hl6s5mgXzEINb68HLWDcZvf7RV3YXUlfYEB9tuo_4_IUbxFkd_cdiO_kBQtzStRIZycnP2sIrnYgHAZ5YmbgiTpb9GtmrWJWxgRJtQ8vU6j8FYlBVDwnO281wuYisGjQUPG2VsmKyZ3zXY4EAAhDIXR3T-XVlp_OCNo6_Q"
+        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1NzkwMjc1MCwiaWF0IjoxNjU3OTAwOTQ1LCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3OTAwOTUwNjE5OTUyODU0LCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.IA7oxhe7M9bM2wDRG1nSpmVbL7Y8RjckvuP-ceLbkrTGFmWKBdSb9VyvNpMEp6hyShS7WmXcX5PhyAD2nfaVLQAn362LNtjHqlAW8PulrF9jmkM9M7ImLdKauRIyhU65Tak7bw4KqI5fdE8QJzzW4_8rJq6pRPPMyTrAFpQ5390k_BpT4W1WCfzJjUBOlXT3UxWVAv8_4vwPFe8pxtLma25BiHkzkqMK8NDFZnRx9P2turaSPsG-UOQQyeq_hLp1-Bv51Essy1cRuSSSXlOvTJr7YniynXA3k14-s8Wb3LTC0rC05vPuqxjzYKRv8PxF2JN7HKcNn6WYQCRyn0W7Yw"
       }
     }
 
-    $.ajax(settings).done(function (response) {
-    //   console.log(response);
-      products = response;
+    await $.ajax(settings).done(function (response) {
+      console.log(response);
+       products =  response;
       // console.log(products[0]);
     });
-
+    
   }
 
-  function getCheapProductOneStore(itemName, locationId){    
-    getProduct(itemName, locationId);
+  async function getCheapProductOneStore(itemName, locationId){    
+    await getProduct(itemName, locationId);
 
     console.log("products");
     console.log(products);
@@ -166,7 +166,7 @@ function getToken() {
     var priceDictArray=[];
       
       for (let i = 0; i < products.data.length; i++) {
-          if (products.data[i].items[0].size == "1 gal"||products.data[i].items[0].size == "1 lb"||products.data[i].items[0].size == "12 ct"){
+          if (products.data[i].items[0].size == "1/2 gal"||products.data[i].items[0].size == "1 lb"||products.data[i].items[0].size == "12 ct"){
         var productDict = {
           location:locationId,
           itemDescription: products.data[i].description,
