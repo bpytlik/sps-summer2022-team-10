@@ -100,6 +100,6 @@ button {
     padding: 10px 10px 10px 10px;
 }
 
-.item-size-price {
+.item-size-price, .total {
     font-weight: bold;
 }

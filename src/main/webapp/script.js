@@ -119,7 +119,8 @@ async function loadTable(totals) {
     // add the last row to show total prices in each store
     const rowTotals = document.createElement('tr');
     for (let i = 0; i < totals.length; i++) {
-        const cell = document.createElement('th');
+        const cell = document.createElement('td');
+        cell.className = "total";
         const currTot = Math.round((totals[i] + Number.EPSILON) * 100) / 100;
         cell.appendChild(document.createTextNode("Total: $" + currTot));
         rowTotals.appendChild(cell);
@@ -156,7 +157,7 @@ function getToken() {
       "method": "GET",
       "headers": {
         "Accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1ODAxMTQ3NiwiaWF0IjoxNjU4MDA5NjcxLCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU4MDA5Njc2OTI1MzE1NDA1LCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.wM8RInYwnezeDGUaMjTGgwhcWIhA6our5Bk4nXtUDUX5RVXNBjIRr7FXDPYR9gm_UsRfXAWBUc6z_DZPa-3rVN_MDndfuPshMc2wm_vliKAg_-yrGkTCu0AUprCd2ha3rZDGj12trJQqKfrbOmqfNHgOvepejPzWEhcS13JSdR_rEhkfSyzwqhNEbi8wOASbZwDZjqjqJLgBQwqfzpNMpKaa7WkIK3iwByLFKs9gAtjpv48vCojk3SMv3V5tBcrSnkzATfnd5uOkvU-LhMGU1Vy9DZ3SfDtnNPJ02cnaEfGmP5X62JoTa0o1mdRIUj6WHAgQ5M7sCPfWsRacI5dpoQ"
+        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1ODAxMzQ2MywiaWF0IjoxNjU4MDExNjU4LCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU4MDExNjYzMTE5MTUwODYxLCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.WpUzFV-9C-eVdQIABWSqUnD1HxIcgpZ9NakegTMkZj00ab_WSDNxu6fSDaME4aqapcwcwZ4laY25bmuqqndRqUV48u0KCOeeoNxOgNR5-A5w7Yvg8naeuEZMrNw68XikoOMQV20pM7e3C-9TM8dKQB46lJ04y4PkwVJa2hArHUk-ZL4DzSoL_Ijo_wUqOZz9r9S5uBF_pNLOu9xROpxWgsGpdX3v9nl5NeM1jqplChwDO5X4Zey3SrPnNrWOOhvBPabfDK-ATLQsbqFhOH6aZbGhdN7qPTuUON0Egj8nmIVUUmbNr4HtWeh8_ZK0AyEEfTyVY7mC79CsDzQd4VuXDw"
       }
     }
 
