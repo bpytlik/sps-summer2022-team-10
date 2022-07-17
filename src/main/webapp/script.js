@@ -62,10 +62,16 @@ async function calculate() {
         // get price
         const dataArr = allCheapProductArray[i];
         console.log(dataArr);
-        total1 += dataArr[0].itemPrice;
-        total2 += dataArr[1].itemPrice;
-        total3 += dataArr[2].itemPrice;
-
+        // deal with undefined
+        if (typeof dataArr[0] != 'undefined') {
+            total1 += dataArr[0].itemPrice;
+        }
+        if (typeof dataArr[1] != 'undefined') {
+            total2 += dataArr[1].itemPrice;
+        }
+        if (typeof dataArr[2] != 'undefined') {
+            total3 += dataArr[2].itemPrice;
+        }
     }
 
     totals.push(total1);
@@ -96,6 +102,16 @@ async function loadTable(totals) {
         const dataArr = allCheapProductArray[i];
         for (let j = 0; j < dataArr.length; j++) {
             const cell = document.createElement('td');
+
+            // deal with undefined
+            if (typeof dataArr[j] == 'undefined') {
+                const errorMsg = document.createElement('div');
+                errorMsg.appendChild(document.createTextNode("NOT FOUND"));
+                errorMsg.className = "item-not-found";
+                cell.appendChild(errorMsg);
+                rowItem.appendChild(cell);
+                continue;
+            }
 
             const picture = document.createElement('img');
             picture.src = dataArr[j].itemImage;

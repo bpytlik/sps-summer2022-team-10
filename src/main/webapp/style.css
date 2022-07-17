@@ -103,3 +103,8 @@ button {
 .item-size-price, .total {
     font-weight: bold;
 }
+
+.item-not-found {
+    font-weight: bold;
+    color: #a6b6a5;
+}
