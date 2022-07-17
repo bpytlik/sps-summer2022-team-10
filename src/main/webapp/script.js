@@ -17,6 +17,7 @@ var stores = ["QFC", "FRYS", "FOODSCO"];
 var products="";
 // var cheapProductArray=[];
 var allCheapProductArray=[];
+var accessToken = "";
 
 async function addToCart(){
     var list = document.getElementById('shopping-cart');
@@ -128,28 +129,15 @@ async function loadTable(totals) {
     compTable.appendChild(rowTotals);
 }
 
-function getToken() {
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://api.kroger.com/v1/connect/oauth2/token",
-      "method": "POST",
-      "headers": {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Basic aW5mbGF0aW9uZ3JvY2VyeWFwcC1kZWM4YTdmZjczZTlhZDRhYWI2ZmE3MGZhZGYyNzdlMTI5Njk1MTgwMzM3MDIzNTE2NjM6OEgyWXdZbjhJRFRLbEs0VFBXZEVEUnpWMjRLd1lZdi1sN0RFRzYxSA=="
-      },
-      "data": {
-        "grant_type": "client_credentials",
-        "scope": "{{scope}}"
-      }
-    }
-
-    $.ajax(settings).done(function (response) {
-      console.log(response);
-    });
-  }
+async function getToken() {
+    const responseFromServer = await fetch('/token');
+    const jsonObj = await responseFromServer.json();
+    accessToken = jsonObj.access_token;
+}
 
   async function getProduct(itemName, locationId) {
+    await getToken();
+    
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -157,7 +145,7 @@ function getToken() {
       "method": "GET",
       "headers": {
         "Accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1ODAxMzQ2MywiaWF0IjoxNjU4MDExNjU4LCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU4MDExNjYzMTE5MTUwODYxLCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.WpUzFV-9C-eVdQIABWSqUnD1HxIcgpZ9NakegTMkZj00ab_WSDNxu6fSDaME4aqapcwcwZ4laY25bmuqqndRqUV48u0KCOeeoNxOgNR5-A5w7Yvg8naeuEZMrNw68XikoOMQV20pM7e3C-9TM8dKQB46lJ04y4PkwVJa2hArHUk-ZL4DzSoL_Ijo_wUqOZz9r9S5uBF_pNLOu9xROpxWgsGpdX3v9nl5NeM1jqplChwDO5X4Zey3SrPnNrWOOhvBPabfDK-ATLQsbqFhOH6aZbGhdN7qPTuUON0Egj8nmIVUUmbNr4HtWeh8_ZK0AyEEfTyVY7mC79CsDzQd4VuXDw"
+        "Authorization": "Bearer " + accessToken
       }
     }
 
