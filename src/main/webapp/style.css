@@ -9,11 +9,20 @@
 }
 
 table {
-    width: 50%;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 th, td {
-    text-align: center;
+    text-align: left;
+    border-bottom: 1px solid #bbcdba;
+    padding: 15px;
+    width: 25%;
+}
+
+tr:hover {
+    background-color: #bbcdba;
 }
 
 h1 {
@@ -81,4 +90,21 @@ button {
 
 #div2 {
   text-align: center;
+}
+
+.item-image {
+    float: left;
+    width:  60px;
+    height: 60px;
+    object-fit: cover;
+    padding: 10px 10px 10px 10px;
+}
+
+.item-size-price, .total {
+    font-weight: bold;
+}
+
+.item-not-found {
+    font-weight: bold;
+    color: #a6b6a5;
 }

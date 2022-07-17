@@ -17,6 +17,7 @@ var stores = ["QFC", "FRYS", "FOODSCO"];
 var products="";
 // var cheapProductArray=[];
 var allCheapProductArray=[];
+var accessToken = "";
 
 async function addToCart(){
     var list = document.getElementById('shopping-cart');
@@ -51,37 +52,39 @@ async function addToCart(){
 }
 
 async function calculate() {
-    // Calculate totals here ...
+    const totals = [];
 
-    // it can just use the global itemList array. 
-    const totals = [];  // change this with real totals
+    var total1 = 0;
+    var total2 = 0;
+    var total3 = 0;
 
-    // You can loop over itemList and keep track of & add up the totals in each store.
-    var price1 = 0;
-    var price2 = 0;
-    var price3 = 0;
-
-    for (let i = 0; i < itemList.length; i++) {
+    for (let i = 0; i < allCheapProductArray.length; i++) {
         // get price
-        const dataArr = Object.values(itemList[i])[0];
-        
+        const dataArr = allCheapProductArray[i];
         console.log(dataArr);
-        price1 += dataArr[0].price;
-        console.log(price1);
-        price2 += dataArr[1].price;
-        price3 += dataArr[2].price;
-
+        // deal with undefined
+        if (typeof dataArr[0] != 'undefined') {
+            total1 += dataArr[0].itemPrice;
+        }
+        if (typeof dataArr[1] != 'undefined') {
+            total2 += dataArr[1].itemPrice;
+        }
+        if (typeof dataArr[2] != 'undefined') {
+            total3 += dataArr[2].itemPrice;
+        }
     }
 
-    totals.push(price1);
-    totals.push(price2);
-    totals.push(price3);
+    totals.push(total1);
+    totals.push(total2);
+    totals.push(total3);
 
     loadTable(totals);
 }
 
 async function loadTable(totals) {
     const compTable = document.getElementById('comparison-table');
+
+    compTable.innerHTML = "";
 
     // adding the first row which shows store names
     const rowStores = document.createElement('tr');
@@ -93,13 +96,38 @@ async function loadTable(totals) {
     compTable.appendChild(rowStores);
 
     // add following rows to show item and price in each store
-    for (let i = 0; i < itemList.length; i++) {
+    for (let i = 0; i < allCheapProductArray.length; i++) {
         const rowItem = document.createElement('tr');
         // get info of one shopping item in all stores
-        const dataArr = Object.values(itemList[i])[0];
+        const dataArr = allCheapProductArray[i];
         for (let j = 0; j < dataArr.length; j++) {
             const cell = document.createElement('td');
-            cell.appendChild(document.createTextNode(dataArr[j].item + " $" + dataArr[j].price));
+
+            // deal with undefined
+            if (typeof dataArr[j] == 'undefined') {
+                const errorMsg = document.createElement('div');
+                errorMsg.appendChild(document.createTextNode("NOT FOUND"));
+                errorMsg.className = "item-not-found";
+                cell.appendChild(errorMsg);
+                rowItem.appendChild(cell);
+                continue;
+            }
+
+            const picture = document.createElement('img');
+            picture.src = dataArr[j].itemImage;
+            picture.className = "item-image";
+
+            const description = document.createElement('div');
+            description.appendChild(document.createTextNode(dataArr[j].itemDescription));
+            description.className = "item-description";
+            const sizePrice = document.createElement('div');
+            sizePrice.appendChild(document.createTextNode(dataArr[j].itemSize + ", $" + dataArr[j].itemPrice));
+            sizePrice.className = "item-size-price";
+
+            cell.appendChild(picture);
+            cell.appendChild(description);
+            cell.appendChild(sizePrice);
+
             rowItem.appendChild(cell);
         }
         compTable.appendChild(rowItem);
@@ -108,35 +136,24 @@ async function loadTable(totals) {
     // add the last row to show total prices in each store
     const rowTotals = document.createElement('tr');
     for (let i = 0; i < totals.length; i++) {
-        const cell = document.createElement('th');
-        cell.appendChild(document.createTextNode("Total: $" + totals[i]));
+        const cell = document.createElement('td');
+        cell.className = "total";
+        const currTot = Math.round((totals[i] + Number.EPSILON) * 100) / 100;
+        cell.appendChild(document.createTextNode("Total: $" + currTot));
         rowTotals.appendChild(cell);
     }
     compTable.appendChild(rowTotals);
 }
 
-function getToken() {
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://api.kroger.com/v1/connect/oauth2/token",
-      "method": "POST",
-      "headers": {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Basic aW5mbGF0aW9uZ3JvY2VyeWFwcC1kZWM4YTdmZjczZTlhZDRhYWI2ZmE3MGZhZGYyNzdlMTI5Njk1MTgwMzM3MDIzNTE2NjM6OEgyWXdZbjhJRFRLbEs0VFBXZEVEUnpWMjRLd1lZdi1sN0RFRzYxSA=="
-      },
-      "data": {
-        "grant_type": "client_credentials",
-        "scope": "{{scope}}"
-      }
-    }
-
-    $.ajax(settings).done(function (response) {
-      console.log(response);
-    });
-  }
+async function getToken() {
+    const responseFromServer = await fetch('/token');
+    const jsonObj = await responseFromServer.json();
+    accessToken = jsonObj.access_token;
+}
 
   async function getProduct(itemName, locationId) {
+    await getToken();
+    
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -144,7 +161,7 @@ function getToken() {
       "method": "GET",
       "headers": {
         "Accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyIsImV4cCI6MTY1NzkwMjc1MCwiaWF0IjoxNjU3OTAwOTQ1LCJpc3MiOiJhcGkua3JvZ2VyLmNvbSIsInN1YiI6IjgyMzRjZDI1LTYzODktNTBiYi1iNWVlLWFlOTZkYjg0ZjI4MCIsInNjb3BlIjoicHJvZHVjdC5jb21wYWN0IiwiYXV0aEF0IjoxNjU3OTAwOTUwNjE5OTUyODU0LCJhenAiOiJpbmZsYXRpb25ncm9jZXJ5YXBwLWRlYzhhN2ZmNzNlOWFkNGFhYjZmYTcwZmFkZjI3N2UxMjk2OTUxODAzMzcwMjM1MTY2MyJ9.IA7oxhe7M9bM2wDRG1nSpmVbL7Y8RjckvuP-ceLbkrTGFmWKBdSb9VyvNpMEp6hyShS7WmXcX5PhyAD2nfaVLQAn362LNtjHqlAW8PulrF9jmkM9M7ImLdKauRIyhU65Tak7bw4KqI5fdE8QJzzW4_8rJq6pRPPMyTrAFpQ5390k_BpT4W1WCfzJjUBOlXT3UxWVAv8_4vwPFe8pxtLma25BiHkzkqMK8NDFZnRx9P2turaSPsG-UOQQyeq_hLp1-Bv51Essy1cRuSSSXlOvTJr7YniynXA3k14-s8Wb3LTC0rC05vPuqxjzYKRv8PxF2JN7HKcNn6WYQCRyn0W7Yw"
+        "Authorization": "Bearer " + accessToken
       }
     }
 
