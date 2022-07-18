@@ -290,6 +290,7 @@ section {
 }
 .header .login-form p a {
   color: #bac34e;
+  font-size: 1.4rem;
 }
 .header .login-form p a:hover {
   text-decoration: underline;
