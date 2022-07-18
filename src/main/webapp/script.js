@@ -15,7 +15,6 @@
 var itemList = [];
 var stores = ["QFC", "FRYS", "FOODSCO"];  
 var products="";
-// var cheapProductArray=[];
 var allCheapProductArray=[];
 var accessToken = "";
 
@@ -27,6 +26,7 @@ async function addToCart(){
     var newCheapProductArray=[];
     var itemName = document.getElementById("item-name").value;
     var entry = document.createElement('li');
+    if (itemName.toLowerCase() == "egg" || itemName.toLowerCase() == "milk" || itemName.toLowerCase() == "apple"){
     entry.appendChild(document.createTextNode(itemName));
     list.appendChild(entry);
     cheapProductFirstStore = await getCheapProductOneStore(itemName,"70500828")
@@ -40,15 +40,9 @@ async function addToCart(){
     allCheapProductArray.push(newCheapProductArray);
     console.log("allCheapProductArray");
     console.log(allCheapProductArray);
-
-    
-    // console.log(cheapProductArray);
-    // const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
-    //     method: 'POST'});
-    // const newItemObject = await responseFromServer.json();
-    // console.log(newItemObject);
-    // itemList.push(newItemObject);
-    // console.log(itemList);
+    } else {
+        alert ("Please enter milk, egg or apple.")
+    }
 }
 
 async function calculate() {
@@ -58,7 +52,7 @@ async function calculate() {
     var total2 = 0;
     var total3 = 0;
 
-    for (let i = 0; i < allCheapProductArray.length; i++) {
+    for (let i = 0; i < await allCheapProductArray.length; i++) {
         // get price
         const dataArr = allCheapProductArray[i];
         console.log(dataArr);
@@ -96,7 +90,7 @@ async function loadTable(totals) {
     compTable.appendChild(rowStores);
 
     // add following rows to show item and price in each store
-    for (let i = 0; i < allCheapProductArray.length; i++) {
+    for (let i = 0; i < await allCheapProductArray.length; i++) {
         const rowItem = document.createElement('tr');
         // get info of one shopping item in all stores
         const dataArr = allCheapProductArray[i];
