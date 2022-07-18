@@ -81,4 +81,37 @@ button {
 
 #div2 {
   text-align: center;
+<<<<<<< Updated upstream
+=======
+}
+
+.item-image {
+    float: left;
+    width:  60px;
+    height: 60px;
+    object-fit: cover;
+    padding: 10px 10px 10px 10px;
+}
+
+.item-size-price, .total {
+    font-weight: bold;
+}
+
+.item-not-found {
+    font-weight: bold;
+    color: #a6b6a5;
+}
+
+a {
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif; 
+  padding: 6px 15px;
+  color: #0A6644;
+  border-radius: 10px;
+}
+
+a:hover, a:active {
+  background: #fff;
+  color: #0A6644;
+>>>>>>> Stashed changes
 }
