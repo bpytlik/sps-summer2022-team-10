@@ -9,11 +9,20 @@
 }
 
 table {
-    width: 50%;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 th, td {
-    text-align: center;
+    text-align: left;
+    border-bottom: 1px solid #bbcdba;
+    padding: 15px;
+    width: 25%;
+}
+
+tr:hover {
+    background-color: #bbcdba;
 }
 
 h1 {
@@ -81,8 +90,6 @@ button {
 
 #div2 {
   text-align: center;
-<<<<<<< Updated upstream
-=======
 }
 
 .item-image {
@@ -113,5 +120,4 @@ a {
 a:hover, a:active {
   background: #fff;
   color: #0A6644;
->>>>>>> Stashed changes
 }

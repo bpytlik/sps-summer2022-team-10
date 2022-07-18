@@ -13,30 +13,78 @@
 // limitations under the License.
 
 var itemList = [];
-var stores = ["California", "Oregon", "Washington"];  // hard-coded for now
+var stores = ["QFC", "FRYS", "FOODSCO"];  
+var products="";
+// var cheapProductArray=[];
+var allCheapProductArray=[];
+var accessToken = "";
 
 async function addToCart(){
     var list = document.getElementById('shopping-cart');
+    var cheapProductFirstStore={};
+    var cheapProductSecondStore={};
+    var cheapProductThirdStor={};
+    var newCheapProductArray=[];
     var itemName = document.getElementById("item-name").value;
     var entry = document.createElement('li');
     entry.appendChild(document.createTextNode(itemName));
     list.appendChild(entry);
-    const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
-        method: 'POST'});
-    const newItemObject = await responseFromServer.json();
-    console.log(newItemObject);
-    itemList.push(newItemObject);
-    console.log(itemList);
+    cheapProductFirstStore = await getCheapProductOneStore(itemName,"70500828")
+    cheapProductSecondStore= await getCheapProductOneStore(itemName,"66000103")
+    cheapProductThirdStore= await getCheapProductOneStore(itemName,"70400352")
+    newCheapProductArray.push(cheapProductFirstStore);
+    newCheapProductArray.push(cheapProductSecondStore);
+    newCheapProductArray.push(cheapProductThirdStore);
+    console.log("newCheapProductArray");
+    console.log(newCheapProductArray);
+    allCheapProductArray.push(newCheapProductArray);
+    console.log("allCheapProductArray");
+    console.log(allCheapProductArray);
+
+    
+    // console.log(cheapProductArray);
+    // const responseFromServer = await fetch(`/item-lookup?item_name=${encodeURIComponent(itemName)}`, {
+    //     method: 'POST'});
+    // const newItemObject = await responseFromServer.json();
+    // console.log(newItemObject);
+    // itemList.push(newItemObject);
+    // console.log(itemList);
 }
 
 async function calculate() {
-    // Calculate totals here ...
-    const totals = [0, 0, 0];  // change this with real totals
+    const totals = [];
+
+    var total1 = 0;
+    var total2 = 0;
+    var total3 = 0;
+
+    for (let i = 0; i < allCheapProductArray.length; i++) {
+        // get price
+        const dataArr = allCheapProductArray[i];
+        console.log(dataArr);
+        // deal with undefined
+        if (typeof dataArr[0] != 'undefined') {
+            total1 += dataArr[0].itemPrice;
+        }
+        if (typeof dataArr[1] != 'undefined') {
+            total2 += dataArr[1].itemPrice;
+        }
+        if (typeof dataArr[2] != 'undefined') {
+            total3 += dataArr[2].itemPrice;
+        }
+    }
+
+    totals.push(total1);
+    totals.push(total2);
+    totals.push(total3);
+
     loadTable(totals);
 }
 
 async function loadTable(totals) {
     const compTable = document.getElementById('comparison-table');
+
+    compTable.innerHTML = "";
 
     // adding the first row which shows store names
     const rowStores = document.createElement('tr');
@@ -48,13 +96,38 @@ async function loadTable(totals) {
     compTable.appendChild(rowStores);
 
     // add following rows to show item and price in each store
-    for (let i = 0; i < itemList.length; i++) {
+    for (let i = 0; i < allCheapProductArray.length; i++) {
         const rowItem = document.createElement('tr');
         // get info of one shopping item in all stores
-        const dataArr = Object.values(itemList[i])[0];
+        const dataArr = allCheapProductArray[i];
         for (let j = 0; j < dataArr.length; j++) {
             const cell = document.createElement('td');
-            cell.appendChild(document.createTextNode(dataArr[j].item + " $" + dataArr[j].price));
+
+            // deal with undefined
+            if (typeof dataArr[j] == 'undefined') {
+                const errorMsg = document.createElement('div');
+                errorMsg.appendChild(document.createTextNode("NOT FOUND"));
+                errorMsg.className = "item-not-found";
+                cell.appendChild(errorMsg);
+                rowItem.appendChild(cell);
+                continue;
+            }
+
+            const picture = document.createElement('img');
+            picture.src = dataArr[j].itemImage;
+            picture.className = "item-image";
+
+            const description = document.createElement('div');
+            description.appendChild(document.createTextNode(dataArr[j].itemDescription));
+            description.className = "item-description";
+            const sizePrice = document.createElement('div');
+            sizePrice.appendChild(document.createTextNode(dataArr[j].itemSize + ", $" + dataArr[j].itemPrice));
+            sizePrice.className = "item-size-price";
+
+            cell.appendChild(picture);
+            cell.appendChild(description);
+            cell.appendChild(sizePrice);
+
             rowItem.appendChild(cell);
         }
         compTable.appendChild(rowItem);
@@ -63,9 +136,74 @@ async function loadTable(totals) {
     // add the last row to show total prices in each store
     const rowTotals = document.createElement('tr');
     for (let i = 0; i < totals.length; i++) {
-        const cell = document.createElement('th');
-        cell.appendChild(document.createTextNode("Total: $" + totals[i]));
+        const cell = document.createElement('td');
+        cell.className = "total";
+        const currTot = Math.round((totals[i] + Number.EPSILON) * 100) / 100;
+        cell.appendChild(document.createTextNode("Total: $" + currTot));
         rowTotals.appendChild(cell);
     }
     compTable.appendChild(rowTotals);
 }
+
+async function getToken() {
+    const responseFromServer = await fetch('/token');
+    const jsonObj = await responseFromServer.json();
+    accessToken = jsonObj.access_token;
+}
+
+  async function getProduct(itemName, locationId) {
+    await getToken();
+    
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.kroger.com/v1/products?filter.term="+itemName+"&filter.locationId="+ locationId,
+      "method": "GET",
+      "headers": {
+        "Accept": "application/json",
+        "Authorization": "Bearer " + accessToken
+      }
+    }
+
+    await $.ajax(settings).done(function (response) {
+      console.log(response);
+       products =  response;
+      // console.log(products[0]);
+    });
+    
+  }
+
+  async function getCheapProductOneStore(itemName, locationId){    
+    await getProduct(itemName, locationId);
+
+    console.log("products");
+    console.log(products);
+
+    var productsDictArray=[];
+    var priceDictArray=[];
+      
+      for (let i = 0; i < products.data.length; i++) {
+          if (products.data[i].items[0].size == "1/2 gal"||products.data[i].items[0].size == "1 lb"||products.data[i].items[0].size == "12 ct"){
+        var productDict = {
+          location:locationId,
+          itemDescription: products.data[i].description,
+          itemPrice: products.data[i].items[0].price.regular,
+          itemSize: products.data[i].items[0].size,
+          itemImage: products.data[i].images[0].sizes[0].url
+        }
+        productsDictArray.push(productDict);
+        console.log("productDict");
+        console.log(productDict);
+      }
+    }
+    for (let i = 0; i < productsDictArray.length; i++){
+        priceDictArray.push(productsDictArray[i].itemPrice);
+    }
+    var min = Math.min(...priceDictArray);
+
+    var index = priceDictArray.indexOf(min);
+
+    //   console.log("productsDictArray[index]");
+    //   console.log(productsDictArray[index]);
+      return productsDictArray[index]
+  }
