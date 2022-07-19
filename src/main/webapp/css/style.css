@@ -996,3 +996,44 @@ section {
   button:hover, a:hover {
     opacity: 0.7;
   }
+
+  section.category {
+    margin-top: 100px;
+    font-size: 20px;
+}
+
+input#item-name {
+    font-size: 1.5em;
+    padding : 5px;
+    margin: 5px;
+}
+
+#comparison-table { 
+    color: #0A6644; 
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 100%
+  }
+  
+.section.div{
+    text-align: center;
+  }
+
+  input#shop-submit-button {
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: lightgreen;
+    border-color: #0A6644;
+    height: 25px;
+    width: 70px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  button#calculate {
+    border-radius: 15px;
+    background-color: #bac34e;
+    border-color: #0A6644;
+    height: 25px;
+    width: 150px;
+    font-family: 'DM Sans', sans-serif;
+    padding: 5px;
+}

@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Logo: Shopping List</title>
         <link rel="preconnect" href="https://fonts.googleapis.com"> 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="script.js" ></script>
+        
+        <link rel="stylesheet" type="text/css" href="style.css">        
+    
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="css/style.css">
+    
+        <script src="js/script.js"></script>
+        <script src="script.js"></script>      
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-           <link rel="preconnect" href="https://fonts.googleapis.com"> 
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
-            <link rel="stylesheet" type="text/css" href="style.css">
-            <title>Logo: Shopping List</title>
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>      
     </head>
-    <body style="background-color: #D0E4CF">
-<header class="header">
+
+<body>
+    <header class="header">
 
     <a href="index.html" class="logo"> <i class="fas fa-shopping-basket"></i> GROCERY HERO </a>
 
@@ -28,33 +33,33 @@
         <a href="contact.html">contact</a>
     </nav>
    </header>
-        
-        <div id="div2">
+   <section class="category">
+        <div class="box">
             <h1>Welcome to Major Savers!</h1>
             <p>What's On Your Mind?</p>
         </div>
         <br>
         <br>
-        <div id="div2">
+        <div class="box">
             <h2>Add to your Shopping List:</h2>
             <form>
                 <input id="item-name" type="text" placeholder="Enter Item" ></input>
-                <input id="submit-button" type="button" value="Submit" onclick="addToCart()"></input>
+                <input id="shop-submit-button" type="button" value="Submit" onclick="addToCart()"></input>
             </form>
             <br>
             <p>Calculate item price and total prices</p>
-            <button onclick="calculate();">Calculate</button>
+            <button id="calculate" onclick="calculate();">Calculate</button>
         </div>
         <br>
         <br>
-        <div id="div2">
+        <div class="box">
             <h2>Your Shopping List</h2>
         </div>
-        <div id="div1">
+        <div>
             <ol id="shopping-cart">
             </ol>
         </div>
-        <div id="div2">
+        <div class="box">
             <h2>Price Comparison</h2>
         </div>
         <div>
@@ -63,8 +68,10 @@
 
         <br>
         <br>
-        <a href= "index.html" > < Return to Home Page</a>
-         <!-- footer section starts  -->
+        <a href= "index.html" > Return to Home Page</a>
+</section>
+
+<!-- footer section starts  -->
 
 <section class="footer">
 
