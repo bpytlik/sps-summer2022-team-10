@@ -123,30 +123,7 @@ a:hover, a:active {
 }
 
 
-.heading {
-    background: url(../image/heading-bg.jpg) no-repeat;
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-    padding-top: 12rem;
-    padding-bottom: 8rem;
-  }
-  .heading h1 {
-    color: #222;
-    font-size: 4rem;
-  }
-  .heading p {
-    padding-top: 1rem;
-    font-size: 2rem;
-    color: #666;
-  }
-  .heading p a {
-    color: #222;
-    padding-right: 0.5rem;
-  }
-  .heading p a:hover {
-    color: #bac34e;
-  }
+
   .header {
     position: fixed;
     top: 0;
@@ -168,7 +145,7 @@ a:hover, a:active {
     padding: 2rem 9%;
   }
   .header .logo {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bolder;
     color: #222;
   }
@@ -177,7 +154,7 @@ a:hover, a:active {
     padding-right: 0.5rem;
   }
   .header .navbar a {
-    font-size: 1.7rem;
+    font-size: 1rem;
     color: #666;
     margin: 0 1rem;
   }
@@ -447,4 +424,28 @@ a:hover, a:active {
   .footer .box-container .box .payment {
     width: 100%;
     margin-top: 2rem;
+  }
+
+  #shop-header {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    -webkit-transition: 0.2s linear;
+    transition: 0.2s linear;
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    height: 80px;
+  }
+
+  #shop-navbar {
+    font-size: 1.7rem;
+    color: #666;
+    margin: 0 1rem;
   }
