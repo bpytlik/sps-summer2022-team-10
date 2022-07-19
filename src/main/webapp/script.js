@@ -26,7 +26,7 @@ async function addToCart(){
     var newCheapProductArray=[];
     var itemName = document.getElementById("item-name").value;
     var entry = document.createElement('li');
-    if (itemName.toLowerCase() == "egg" || itemName.toLowerCase() == "milk" || itemName.toLowerCase() == "apple"){
+   
     entry.appendChild(document.createTextNode(itemName));
     list.appendChild(entry);
     cheapProductFirstStore = await getCheapProductOneStore(itemName,"70500828")
@@ -40,9 +40,7 @@ async function addToCart(){
     allCheapProductArray.push(newCheapProductArray);
     console.log("allCheapProductArray");
     console.log(allCheapProductArray);
-    } else {
-        alert ("Please enter milk, egg or apple.")
-    }
+    
 }
 
 async function calculate() {
