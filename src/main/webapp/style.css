@@ -108,3 +108,16 @@ button {
     font-weight: bold;
     color: #a6b6a5;
 }
+
+a {
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif; 
+  padding: 6px 15px;
+  color: #0A6644;
+  border-radius: 10px;
+}
+
+a:hover, a:active {
+  background: #fff;
+  color: #0A6644;
+}
