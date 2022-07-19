@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>shop</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- font awesome cdn link  -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> --> 
 
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
@@ -18,17 +20,20 @@
 
 <header class="header">
 
-    <a href="home.html" class="logo"> <i class="fas fa-shopping-basket"></i> MAJOR SAVERS </a>
+    <a href="index.html" class="logo"> <i class="fas fa-shopping-basket"></i> GROCERY HERO </a>
 
     <nav class="navbar">
-        <a href="home.html">home</a>
+        <a href="index.html">home</a>
         <a href="shop.html">shop</a>
         <a href="about.html">about</a>
-        <a href="blog.html">documentation</a>
+        <a href="documentation.html">documentation</a>
         <a href="contact.html">contact</a>
     </nav>
 
-    <div class="icons">
+
+   
+
+    <!-- <div class="icons">
         <div id="menu-btn" class="fas fa-bars"></div>
         <div id="search-btn" class="fas fa-search"></div>
         <div id="cart-btn" class="fas fa-shopping-cart"></div>
@@ -73,7 +78,10 @@
         </div>
         <h3 class="total"> total : <span>56.97</span> </h3>
         <a href="#" class="btn">checkout cart</a>
-    </div>
+    </div> -->
+
+</section>
+
 
     <form action="" class="login-form">
         <h3>login form</h3>
@@ -92,16 +100,65 @@
 
 <!-- header section ends -->
 
+
 <div class="heading">
     <h1>our shop</h1>
-    <p> <a href="home.html">home >></a> shop </p>
+    <p> <a href="index.html">home >></a> shop </p>
 </div>
+
+<a style= float:left; href= "index.html" >Go to Home</a>
+
 
 <section class="category">
 
-    <h1 class="title"> our <span>category</span> <a href="#">view all >></a> </h1>
+    <h1 class="title"> Start <span> Shopping</span> <a href="#">view all >></a> </h1>
 
-    <div class="box-container">
+    <div class="box">
+        <section>
+      
+        <head>
+            <meta charset="utf-8">
+            <link rel="preconnect" href="https://fonts.googleapis.com"> 
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="style.css">
+            <title>Logo: Shopping List</title>
+        </head>
+        <body style="background-color: #fafafa">
+            <br>
+            <br>
+            <div style="text-align: center">
+                <h2 style="color: #bac34e; font-family: 'DM Sans', sans-serif; font: bolder">Add to your Shopping List:</h2>
+                <form>
+                    <input id="item-name" type="text" placeholder="Enter Item" style="border-radius: 15px; width: 300px; height: 20px; border-color:#bac34e; padding: 5px; padding-left: 15px; font-family: 'DM Sans', sans-serif"></input>
+                    <input type="button" value="Submit" onclick="addToCart()" style="border-radius: 10px; background-color: white; border-color:#bac34e; height: 25px; width: 70px; font-family: 'DM Sans', sans-serif"></input>
+                </form>
+                <script src="js/script.js"></script>
+                <br>
+                <p style="color: #000000; font-family: 'DM Sans', sans-serif; font-size: 100%">Calculate item price and total prices</p>
+                <input type="button" value="Compare" onclick="calculate()"" style="border-radius: 10px; background-color: white; border-color:#FF850F height: 25px; width: 70px; font-family: 'DM Sans', sans-serif"</input>
+            </div>
+            <br>
+            <br>
+            <div style="text-align: center" class="box">
+                <h2 style="color: #000000; font-family: 'DM Sans', sans-serif; font: bolder" class="box">Your Shopping List</h2>
+            </div>
+            <div style="display: flex; justify-content: center">
+                <ol id="shopping-cart" style="color: #000000; font-family: 'DM Sans', sans-serif; font-size: 100%">
+                </ol>
+            </div>
+            <div style="display: flex; justify-content: center" class="box">
+                <h2 style="color: #000000; font-family: 'DM Sans', sans-serif; font: bolder">Price Comparison</h2>
+            </div>
+            <div style="display: flex; justify-content: center">
+                <table id="comparison-table" style="color: #000000; font-family: 'DM Sans', sans-serif; font-size: 100%"></table>
+   
+            </div>
+        </body>
+    
+    </div>
+
+    <!-- <div class="box-container">
 
         <a href="#" class="box">
             <img src="image/cat-1.png" alt="">
@@ -128,10 +185,10 @@
             <h3>organic wheat</h3>
         </a>
 
-    </div>
+    </div> -->
 
 </section>
-
+<!-- 
 <section class="products">
 
     <h1 class="title"> our <span>products</span> <a href="#">view all >></a> </h1>
@@ -291,7 +348,7 @@
                     <i class="fas fa-star"></i>
                     <i class="far fa-star"></i>
                 </div>
-            </div>
+            </div> -->
         </div>
 
     </div>
@@ -327,21 +384,19 @@
 
         <div class="box">
             <h3>quick links</h3>
-            <a href="home.html"> <i class="fas fa-arrow-right"></i> home</a>
+            <a href="index.html"> <i class="fas fa-arrow-right"></i> home </a>
             <a href="shop.html"> <i class="fas fa-arrow-right"></i> shop</a>
             <a href="about.html"> <i class="fas fa-arrow-right"></i> about</a>
-            <a href="review.html"> <i class="fas fa-arrow-right"></i> review</a>
-            <a href="blog.html"> <i class="fas fa-arrow-right"></i> blog</a>
+            <a href="documentation.html"> <i class="fas fa-arrow-right"></i> documentation </a>
             <a href="contact.html"> <i class="fas fa-arrow-right"></i> contact</a>
         </div>
 
-        <div class="box">
+        <!-- <div class="box">
             <h3>extra links</h3>
             <a href="#"> <i class="fas fa-arrow-right"></i> my list </a>
             <a href="#"> <i class="fas fa-arrow-right"></i> my wishlist </a>
             <a href="#"> <i class="fas fa-arrow-right"></i> my account </a>
-            <a href="#"> <i class="fas fa-arrow-right"></i> terms or use </a>
-        </div>
+        </div> -->
 
 
         <div class="box">
@@ -372,7 +427,7 @@
 
 
 <!-- custom css file link  -->
-<script src="js/script.js"></script>
 
 </body>
 </html>
+
