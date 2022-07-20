@@ -1015,7 +1015,7 @@ input#item-name {
 }
 
 #comparison-table { 
-    color: #0A6644; 
+    color: #bac34e; 
     font-family: 'DM Sans', sans-serif; 
     font-size: 85%
 }
@@ -1089,5 +1089,5 @@ ol#shopping-cart {
 
 .item-not-found {
     font-weight: bold;
-    color: #a6b6a5;
+    color: #bac34e;
 }
