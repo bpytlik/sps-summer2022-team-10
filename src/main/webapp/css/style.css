@@ -1017,32 +1017,35 @@ input#item-name {
 #comparison-table { 
     color: #0A6644; 
     font-family: 'DM Sans', sans-serif; 
-    font-size: 100%
-  }
+    font-size: 85%
+}
   
 .section.div{
     text-align: center;
   }
 
   input#shop-submit-button {
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 10px;
-    background-color: rgba(238, 205, 144, 0.911);
-    border-color: rgba(238, 205, 144, 0.911);
-    height: 25px;
-    width: 100px;
-    font-family: 'DM Sans', sans-serif;
+    background-color: #bac34e;
+    border-color: #bac34e;
+    height: 35px;
+    width: 110px;
     color:white;
+    cursor: pointer;
+  }
+
+  input#shop-submit-button:hover {
+    background-color: #222;
   }
 
   button#calculate {
     border-radius: 15px;
-    background-color: rgba(238, 205, 144, 0.911);
-    border-color: rgba(238, 205, 144, 0.911);
-    height: 25px;
-    width: 100px;
+    background-color: #bac34e;
+    border-color: #bac34e;
+    height: 42px;
+    width: 130px;
     font-family: 'DM Sans', sans-serif;
-    padding: 5px;
     font-size: 20px;
 }
 
@@ -1071,4 +1074,20 @@ ol#shopping-cart {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 40px;
+}
+
+.item-image {
+    width:  100px;
+    height: 100px;
+    object-fit: cover;
+    padding: 10px 10px 10px 10px;
+}
+
+.item-size-price, .total {
+    font-weight: bold;
+}
+
+.item-not-found {
+    font-weight: bold;
+    color: #a6b6a5;
 }
