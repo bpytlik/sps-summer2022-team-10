@@ -1000,14 +1000,14 @@ section {
   section.category {
     margin-top: 100px;
     font-size: 20px;
-    color: #0A6644;    
+    color: #bac34e;    
 }
 
 input#item-name {
     border-radius: 15px;
     width: 300px;
     height: 40px;
-    border-color: #0A6644;
+    border-color: #bac34e;
     padding: 5px;
     padding-left: 15px;
     font-family: 'DM Sans', sans-serif;
@@ -1015,7 +1015,7 @@ input#item-name {
 }
 
 #comparison-table { 
-    color: #0A6644; 
+    color: #bac34e; 
     font-family: 'DM Sans', sans-serif; 
     font-size: 85%
 }
@@ -1057,13 +1057,13 @@ table {
 
 th, td {
     text-align: left;
-    border-bottom: 1px solid #bbcdba;
+    border-bottom: 1px solid #bac34e;
     padding: 15px;
     width: 25%;
 }
 
 tr:hover {
-    background-color: #bbcdba;
+    background-color: #bac34e;
 }
 
 ol#shopping-cart {
