@@ -996,3 +996,98 @@ section {
   button:hover, a:hover {
     opacity: 0.7;
   }
+
+  section.category {
+    margin-top: 100px;
+    font-size: 20px;
+    color: #0A6644;    
+}
+
+input#item-name {
+    border-radius: 15px;
+    width: 300px;
+    height: 40px;
+    border-color: #0A6644;
+    padding: 5px;
+    padding-left: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+}
+
+#comparison-table { 
+    color: #0A6644; 
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 85%
+}
+  
+.section.div{
+    text-align: center;
+  }
+
+  input#shop-submit-button {
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #bac34e;
+    border-color: #bac34e;
+    height: 35px;
+    width: 110px;
+    color:white;
+    cursor: pointer;
+  }
+
+  input#shop-submit-button:hover {
+    background-color: #222;
+  }
+
+  button#calculate {
+    border-radius: 15px;
+    background-color: #bac34e;
+    border-color: #bac34e;
+    height: 42px;
+    width: 130px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+}
+
+table {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    text-align: left;
+    border-bottom: 1px solid #bbcdba;
+    padding: 15px;
+    width: 25%;
+}
+
+tr:hover {
+    background-color: #bbcdba;
+}
+
+ol#shopping-cart {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.item-image {
+    width:  100px;
+    height: 100px;
+    object-fit: cover;
+    padding: 10px 10px 10px 10px;
+}
+
+.item-size-price, .total {
+    font-weight: bold;
+}
+
+.item-not-found {
+    font-weight: bold;
+    color: #a6b6a5;
+}

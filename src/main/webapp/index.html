@@ -1,52 +1,125 @@
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="preconnect" href="https://fonts.googleapis.com"> 
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="script.js" ></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <title>Logo: Shopping List</title>
-    </head>
-    <body style="background-color: #D0E4CF">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
 
-        <div id="div2">
-            <h1>Welcome to Major Savers!</h1>
-            <p>What's On Your Mind?</p>
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/script.js"></script>
+    <script src="script.js"></script>
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="index.html" class="logo"> <i class="fas fa-shopping-basket"></i> GROCERY HERO </a>
+
+    <nav class="navbar">
+        <a href="index.html">home</a>
+        <a href="shop.html">shop</a>
+        <a href="about.html">about</a>
+        <a href="documentation.html">documentation</a>
+        <a href="contact.html">contact</a>
+    </nav>
+
+</header>
+
+<!-- header section ends -->
+
+<section class="home">
+
+    <div class="slides-container">
+
+        <div class="slide active">
+            <div class="content">
+                <span>fresh and organic</span>
+                <h3>The best grocery price finder</h3>
+                <a href="shop.html" class="btn">shop now</a>
+            </div>
+            <div class="image">
+                <img src="image/home-img-1.png" alt="">
+            </div>
         </div>
-        <br>
-        <br>
-        <div id="div2">
-            <h2>Add to your Shopping List:</h2>
-            <form>
-                <input id="item-name" type="text" placeholder="Enter Item" ></input>
-                <input id="submit-button" type="button" value="Submit" onclick="addToCart()"></input>
+
+        <div class="slide">
+            <div class="content">
+                <span>fresh and organic</span>
+                <h3>Save more with Grocery Hero</h3>
+                <a href="#" class="btn">shop now</a>
+            </div>
+            <div class="image">
+                <img src="image/home-img-2.png" alt="">
+            </div>
+        </div>
+
+    </div>
+
+    <div id="next-slide" class="fas fa-angle-right" onclick="next()"></div>
+    <div id="prev-slide" class="fas fa-angle-left" onclick="next()"></div>
+
+</section>
+
+<section class="banner-container">
+
+    <div class="banner">
+        <img src="image/banner-1.jpg" alt="">
+        <div class="content">
+            <span>find stores near you</span>
+            <h3>Google Maps</h3>
+            <a href="https://www.google.com/maps?ll=44.932123,-122.471893&z=6&t=m&hl=en-US&gl=US&mapclient=embed&q=oregon+grocery" class="btn" target="_blank">shop now</a>
+        </div>
+    </div>
+
+    <div class="banner">
+        <img src="image/banner-2.jpg" alt="">
+        <div class="content">
+            <span>see your list</span>
+            <h3>What's in my cart?</h3>
+            <a href="shop.html" class="btn">shop now</a>
+        </div>
+    </div>
+
+</section>
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="index.html"> <i class="fas fa-arrow-right"></i> home</a>
+            <a href="shop.html"> <i class="fas fa-arrow-right"></i> shop</a>
+            <a href="about.html"> <i class="fas fa-arrow-right"></i> about</a>
+            <a href="documentation.html"> <i class="fas fa-arrow-right"></i> documentation</a>
+            <a href="contact.html"> <i class="fas fa-arrow-right"></i> contact</a>
+        </div>
+
+        <div class="box">
+            <h3>newsletter</h3>
+            <p>subscribe for latest updates</p>
+            <form action="">
+                <input type="email" placeholder="enter your email">
+                <input type="submit" value="subscribe" class="btn">
             </form>
-            <br>
-            <p>Calculate item price and total prices</p>
-            <button onclick="calculate();">Calculate</button>
-        </div>
-        <br>
-        <br>
-        <div id="div2">
-            <h2>Your Shopping List</h2>
-        </div>
-        <div id="div1">
-            <ol id="shopping-cart">
-            </ol>
-        </div>
-        <div id="div2">
-            <h2>Price Comparison</h2>
-        </div>
-        <div>
-            <table id="comparison-table"></table>
         </div>
 
-        <br>
-        <br>
-        <a href= "home.html" > < Return to Home Page</a>
-    </body>
+    </div>
+
+</section>
+
+<!-- footer section ends -->
+
+
+</body>
 </html>
